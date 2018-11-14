@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>ARCO</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<canvas id="arco" width="400" height="400"></canvas>
+<script>
+    var canvas = document.getElementById("arco");
+    var contexto = canvas.getContext("2d");
+
+    contexto.fillStyle = 'green';
+    contexto.strokeStyle = 'gray';
+    contexto.lineWidth = 2;
+
+    // MESMO PATH
+    contexto.beginPath();
+    contexto.arc(
+            50, 50,             /*      X Y      */
+            40,                 /*      RAIO     */
+            90 * Math.PI / 180, /*      INICIO   */
+            270 * Math.PI / 180, /*      FIM     */
+            false                /*      ANTI-H  */
+    );
+    contexto.arc(
+            150, 50,             /*      X Y     */
+            40,                  /*      RAIO    */
+            90 * Math.PI / 180,  /*      INICIO  */
+            270 * Math.PI / 180, /*      FIM     */
+            true                 /*      HORARIO */
+    );
+    contexto.fill();
+    contexto.stroke();
+
+    // PATH SEPARADOS
+    contexto.fillStyle = 'blue';
+    contexto.beginPath();
+    contexto.arc(
+            50, 150,             /*      X Y      */
+            40,                 /*      RAIO     */
+            90 * Math.PI / 180, /*      INICIO   */
+            270 * Math.PI / 180, /*      FIM     */
+            false                /*      ANTI-H  */
+    );
+    contexto.fill();
+    contexto.stroke();
+    contexto.beginPath();
+
+    contexto.arc(
+            150, 150,            /*      X Y     */
+            40,                  /*      RAIO    */
+            90 * Math.PI / 180,  /*      INICIO  */
+            270 * Math.PI / 180, /*      FIM     */
+            true                 /*      HORARIO */
+    );
+    contexto.fill();
+    contexto.stroke();
+
+    // ARCO COMPLETO
+    contexto.fillStyle = 'orange';
+    contexto.beginPath();
+    contexto.arc(
+            250, 50,             /*      X Y      */
+            40,                  /*      RAIO     */
+            0,                   /*      INICIO   */
+            2 * Math.PI          /*      FIM      */
+    );
+    contexto.fill();
+    contexto.stroke();
+</script>
+</body>
+</html>

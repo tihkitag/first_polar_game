@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>TESTE NAVE</title>
+        <link rel="stylesheet" href="StyleSheet/canvas.css">
+        
+        <script src="../javascript/game-engine.js"></script>
+        <script src="../javascript/keyboard.js"></script>
+        <script src="../javascript/spritesheet.js"></script>
+        <script src="../javascript/background.js"></script>
+        <script src="../javascript/player.js"></script>
+        <script src="../javascript/enemy.js"></script>
+        <script src="../javascript/projectile.js"></script>
+        <script src="../javascript/canvas-helper.js"></script>
+        <script src="../javascript/collider.js"></script>
+        
+        <script src="JavaScript/animation.js"></script>
+    </head>
+    <body>
+        <canvas id="canvas"></canvas>
+        <script>
+            var imgPolar = new Image();
+            imgPolar.src = '../image/polar.png';
+            var imgSpace = new Image();
+            imgSpace.src = '../image/bg-space.png';
+            var imgStars = new Image();
+            imgStars.src = '../image/bg-stars.png';
+            var imgClouds = new Image();
+            imgClouds.src = '../image/bg-clouds.png';
+
+            var imagesLoaded = 0;
+            var imagesSize = 4;
+
+            imgPolar.onload = loading;
+            imgSpace.onload = loading;
+            imgStars.onload = loading;
+            imgClouds.onload = loading;
+
+            function loading() {
+                if (++imagesLoaded == imagesSize)
+                    start();
+            }
+
+            function start() {
+                var engine = new GameEngine();
+
+                var bgSpace = new Background(engine, imgSpace);
+                bgSpace.speed = 3;
+                var bgStars = new Background(engine, imgStars);
+                bgStars.speed = 7;
+                var bgClouds = new Background(engine, imgClouds);
+                bgClouds.speed = 10;
+
+                var polar = new Player(engine, imgPolar);
+
+                engine.addSprite(bgSpace);
+                engine.addSprite(bgStars);
+                engine.addSprite(bgClouds);
+                
+                engine.addSprite(polar);
+
+                engine.initialize();
+                engine.startAnimation();
+            }
+        </script>
+    </body>
+</html>

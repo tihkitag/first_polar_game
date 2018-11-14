@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>TESTE PARALLAX</title>
+    <script src="../javascript/game-engine.js"></script>
+    <script src="../javascript/keyboard.js"></script>
+    <script src="JavaScript/animation.js"></script>
+    <script src="../javascript/background.js"></script>
+</head>
+<body>
+<canvas id="canvas" width="500" height="500"></canvas>
+<script>
+    var imagemEspaco = new Image();
+    imagemEspaco.src = 'Imagem/fundo-espaco.png';
+
+    var imagemEstrelas = new Image();
+    imagemEstrelas.src = 'Imagem/fundo-estrelas.png';
+
+    var imagemNuvens = new Image();
+    imagemNuvens.src = 'Imagem/fundo-nuvens.png';
+
+    var carregadas = 0;
+    var total = 3;
+
+    imagemEspaco.onload = carregando;
+    imagemEstrelas.onload = carregando;
+    imagemNuvens.onload = carregando;
+
+    function carregando() {
+        if (++carregadas == total) iniciar();
+    }
+
+    function iniciar() {
+        var engine = new GameEngine();
+
+        var fundoEspaco = new Background(engine, imagemEspaco);
+        var fundoEstrelas = new Background(engine, imagemEstrelas);
+        var fundoNuvens = new Background(engine, imagemNuvens);
+
+        fundoEspaco.velocidade = 3;
+        fundoEstrelas.velocidade = 7;
+        fundoNuvens.velocidade = 10;
+
+        var animacao = new Animation(engine);
+
+        animacao.addSprite(fundoEspaco);
+        animacao.addSprite(fundoEstrelas);
+        animacao.addSprite(fundoNuvens);
+
+        animacao.start();
+    }
+</script>
+</body>
+</html>

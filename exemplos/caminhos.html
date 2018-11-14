@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>CAMINHOS</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<canvas id="estrela" width="500" height="500"></canvas>
+<script>
+    var canvas = document.getElementById("estrela");
+    var context = canvas.getContext("2d");
+
+    context.beginPath();
+
+    context.moveTo(75, 250);
+    context.lineTo(150, 50);
+    context.lineTo(225, 250);
+    context.lineTo(50, 120);
+    context.lineTo(250, 120);
+    context.lineTo(75, 250);
+
+    context.fillStyle = 'blue';
+    context.fill();
+
+    context.lineWidth = 5;
+    context.strokeStyle = 'red';
+    context.stroke();
+</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!--
+ : Bear Bone Technology :
+-->
+<html>
+    <head>
+        <title>BEAR BONE TECHNOLOGY - HTML5 GAME</title>
+        <meta charset="UTF-8">
+
+        <!--    STYLESHEETs    -->
+        <link rel="stylesheet" href="stylesheet/canvas.css">
+
+        <!--    JAVASCRIPTs    -->
+        <script src="javascript/game-engine.js"></script>
+        <script src="javascript/animation.js"></script>
+        <script src="javascript/background.js"></script>
+        <script src="javascript/boom.js"></script>
+        <script src="javascript/canvas-helper.js"></script>
+        <script src="javascript/collider.js"></script>
+        <script src="javascript/enemy.js"></script>
+        <script src="javascript/hud.js"></script>
+        <script src="javascript/image-loader.js"></script>
+        <script src="javascript/keyboard.js"></script>
+        <script src="javascript/player.js"></script>
+        <script src="javascript/projectile.js"></script>
+        <script src="javascript/spritesheet.js"></script>
+    </head>
+    <body>
+        <canvas id="html5_game">
+            Bem... isso é embaraçoso, mas...
+            <br>seu navegador não suporta o Canvas do HTML5!
+            <br>):
+            <br>Tente ATUALIZA-LO!
+        </canvas>
+        <a id="play" href="javascript: startGame()">PLAY!</a>
+        <script>
+
+            var engine = new GameEngine("html5_game", document);
+            new ImageLoader(loading, initialize).load();
+
+            var MUSIC = new Audio();
+            MUSIC.id = "music";
+            MUSIC.src = 'audio/music.mp3';
+            MUSIC.volume = 0.5;
+            MUSIC.loop = true;
+            MUSIC.load();
+
+            function loading(loaded, total) {
+                engine.canvasHelper.save();
+
+                var size = loaded / total;
+
+                engine.canvasHelper.clear();
+
+                engine.canvasHelper.fillStyle('red');
+                engine.canvasHelper.fillRect(0, 0, engine.canvasHelper.width() * size, engine.canvasHelper.height() / 100);
+
+                engine.canvasHelper.message("    Uma homenagem as duas criaturas mais importantes", 25, 20, 100);
+                engine.canvasHelper.message("em minha vida no Universo:", 25, 20, 130);
+                engine.canvasHelper.message("       Fabiane Michelle Kitagawa e Polar!", 25, 20, 160);
+                engine.canvasHelper.message("           AMO VOCÊS! \<3", 25, 20, 190);
+
+                engine.canvasHelper.message("by: TIAGO COUTO", 10, 10, 500);
+                engine.canvasHelper.message("    FABIANE M KITAGAWA", 10, 10, 515);
+                engine.canvasHelper.message("    POLAR", 10, 10, 530);
+
+                engine.canvasHelper.restore();
+            }
+
+            function initialize() {
+                var space = new Background(engine, ImageLoader.IMAGES.BACKGROUND_SPACE, 60);
+                var stars = new Background(engine, ImageLoader.IMAGES.BACKGROUND_STARS, 150);
+                var clouds = new Background(engine, ImageLoader.IMAGES.BACKGROUND_CLOUD, 500);
+
+                var polor = new Player(engine, ImageLoader.IMAGES.PLAYER_POLOR);
+
+                var hud = new HUD(engine, polor);
+
+                engine.addSprite(space);
+                engine.addSprite(stars);
+                engine.addSprite(clouds);
+
+                engine.addPlayer(polor, hud);
+
+                engine.showPlayLink();
+            }
+
+            function startGame() {
+                engine.element.getElementById('play').style.display = 'none';
+
+                MUSIC.play();
+                engine.initialize();
+                engine.startAnimation();
+            }
+        </script>
+    </body>
+</html>

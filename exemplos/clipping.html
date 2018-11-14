@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>SPRITESHEET CLIPPING</title>
+    <script src="JavaScript/canvas.js"></script>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+    var imageSonic = new Image();
+
+    imageSonic.src = 'Imagem/spritesheet.png';
+
+    imageSonic.onload = function () {
+        var linhas = 3;
+        var colunas = 8;
+        var altura = imageSonic.height / linhas;
+
+        var largura = imageSonic.width / colunas;
+        var sonicRecorteLinha = 2;
+
+        var sonicRecorteColuna = 7;
+        var y = altura * sonicRecorteLinha;
+
+        var x = largura * sonicRecorteColuna;
+
+        var canvas = new Canvas();
+
+        canvas.context.drawImage(
+                imageSonic,
+                x,
+                y,
+                largura,
+                altura,
+                100,
+                100,
+                largura,
+                altura
+        );
+    };
+</script>
+</body>
+</html>

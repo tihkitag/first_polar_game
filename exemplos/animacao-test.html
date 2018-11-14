@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>TESTE DE ANINAMAÇÃO : LOOP COM SPRITES</title>
+        <link rel="stylesheet" href="StyleSheet/canvas.css">
+        <script src="JavaScript/bola.js"></script>
+        <script src="../javascript/game-engine.js"></script>
+        <script src="../javascript/canvas-helper.js"></script>
+        <script src="../javascript/collider.js"></script>
+        <script src="../javascript/keyboard.js"></script>
+        <script src="JavaScript/animation.js"></script>
+    </head>
+    <body>
+        <canvas id="canvas" width="500" height="500"></canvas>
+        <script>
+            var canvas = document.getElementById("canvas");
+            var context = canvas.getContext("2d");
+
+            var bola1 = new Bola(canvas);
+            bola1.x = 100;
+            bola1.y = 200;
+            bola1.velocidadeX = 20;
+            bola1.velocidadeY = -10;
+            bola1.cor = 'red';
+            bola1.raio = 20;
+
+            var bola2 = new Bola(canvas);
+            bola2.x = 200;
+            bola2.y = 100;
+            bola2.velocidadeX = -10;
+            bola2.velocidadeY = 20;
+            bola2.cor = 'blue';
+            bola2.raio = 30;
+
+            var bola3 = new Bola(canvas);
+            bola3.x = 20;
+            bola3.y = 10;
+            bola3.velocidadeX = -100;
+            bola3.velocidadeY = 20;
+            bola3.cor = 'green';
+            bola3.raio = 10;
+
+            var engine = new GameEngine();
+            engine.addSprite(bola1);
+            engine.addSprite(bola2);
+            engine.addSprite(bola3);
+            engine.startAnimation();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>IMAGEM</title>
+</head>
+<body>
+<canvas id="imagem" width="500" height="500"></canvas>
+<script>
+    var canvas = document.getElementById("imagem");
+    var contexto = canvas.getContext("2d");
+
+    var imagem = new Image();
+    imagem.src="Imagem/ovni.png";
+    imagem.onload = function() {
+        var x = 70;
+        for(var i = 0 ; i < 5 ; i ++ )
+            contexto.drawImage(imagem, x*i, 20, 64, 32)
+    };
+</script>
+</body>
+</html>

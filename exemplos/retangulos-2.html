@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>RETANGULOS 2</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<canvas id="retangulos" width="200" height="200"></canvas>
+<script>
+    var canvas = document.getElementById("retangulos");
+    var contextoRet = canvas.getContext("2d");
+
+    contextoRet.fillStyle = 'red';
+    contextoRet.fillRect(50, 25, 100, 110);
+
+    contextoRet.lineWidth = 3;
+    contextoRet.strokeStyle = 'blue';
+    contextoRet.strokeRect(10, 10, 25, 15);
+</script>
+</body>
+</html>

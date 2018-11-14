@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!--
+ : Bear Bone Technology :
+-->
+<html>
+    <head>
+        <title>RETANGULOS 1</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <canvas id="retangulo" width="200" height="200"></canvas>
+        <script>
+            var canvas = document.getElementById("retangulo");
+            var context = canvas.getContext("2d");
+
+            context.fillRect(50, 50, 100, 100);
+
+            context.fillRect(5, 5, 10, 10);
+            context.fillRect(10, 10, 10, 10);
+            context.fillRect(15, 15, 10, 10);
+            context.fillRect(15, 5, 10, 10);
+
+            context.strokeRect(5, 35, 10, 10);
+            context.strokeRect(10, 40, 10, 10);
+            context.strokeRect(15, 45, 10, 10);
+            context.strokeRect(15, 35, 10, 10);
+        </script>
+    </body>
+</html>

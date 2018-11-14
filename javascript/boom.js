@@ -2,11 +2,6 @@
  * Created by Tiago on 13/07/2014.
  */
 
-var AUDIO_BOOM = new Audio();
-AUDIO_BOOM.src = 'audio/boom.mp3';
-AUDIO_BOOM.volume = 0.4;
-AUDIO_BOOM.load();
-
 /**
  * @param {GameEngine} engine THE GameEngine should be EVERYWHERE! =D
  * @param {Player|Enemy} sprite Sprite to BOOM!

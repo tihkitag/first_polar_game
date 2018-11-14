@@ -25,15 +25,16 @@ function GameEngine(canvasName, element, debug) {
     this.canvasName = canvasName;
     this.element = element;
 
+    this.canvasHelper = null;
+    this.player = null;
+
     this.keyboard = new Keyboard(this);
     this.animation = new Animation(this);
     this.collider = new Collider(this);
-    this.canvasHelper = null;
+    this.imageLoader = new ImageLoader(this);
 
     this.lastCycle = 0;
     this.timeSinceLastCycle = 0;
-
-    this.player = null;
 
     return this.init();
 }
@@ -56,12 +57,17 @@ GameEngine.prototype = {
                 engine.startAnimation();
         });
 
+
         this.canvasHelper = new CanvasHelper(this);
         this.canvasHelper.clear();
+        this.imageLoader.load();
         return this;
     },
-    initialize: function() {
+    activateKeyboard: function() {
         this.keyboard.activate();
+    },
+    deactivateKeyboard: function() {
+        this.keyboard.deactivate();
     },
     isRunning: function() {
         return this.animation.isRunning();
@@ -92,7 +98,7 @@ GameEngine.prototype = {
 
         this.canvasHelper.message(this.player.score + ' PONTOS', 50, 200, 70);
 
-        this.canvasHelper.message(" GAME OVER ! D= ",  50, 20, 190);
+        this.canvasHelper.message(" GAME OVER ! D= ", 50, 20, 190);
 
         this.canvasHelper.message("by: TIAGO COUTO", 10, 10, 500);
         this.canvasHelper.message("    FABIANE M KITAGAWA", 10, 10, 515);
@@ -144,5 +150,12 @@ GameEngine.prototype = {
     },
     showPlayLink: function() {
         this.element.getElementById('play').style.display = 'block';
+    },
+    startGame: function() {
+        this.element.getElementById('play').style.display = 'none';
+
+        MUSIC.play();
+        this.activateKeyboard();
+        this.startAnimation();
     }
 };

@@ -3,14 +3,14 @@
  */
 
 /**
-  * @param {GameEngine} engine THE GameEngine should be EVERYWHERE! =D
-  * @param {Player} player Player Sprite
-  */
-function HUD(engine, player) {
+ * @param {GameEngine} engine THE GameEngine should be EVERYWHERE! =D
+ * @param {Player} player Player Sprite
+ * @param {Image} sheet HUD image for LIFES
+ */
+function HUD(engine, player, sheet) {
     this.engine = engine;
     this.player = player;
-
-    this.sheet = player.sheet;
+    this.sheet = new Spritesheet(this.engine, sheet, 1, 1, 60);
 }
 
 HUD.prototype = {

@@ -36,6 +36,9 @@ Keyboard.prototype = {
     activate: function() {
         this.activated = true;
     },
+    deactivate: function() {
+        this.activated = false;
+    },
     keyDown: function() {
         var keyboard = this;
         this.element.addEventListener('keydown', function(event) {

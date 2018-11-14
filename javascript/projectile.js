@@ -2,11 +2,6 @@
  * Created by Tiago on 12/07/2014.
  */
 
-var AUDIO_PROJECTILE = new Audio();
-AUDIO_PROJECTILE.src = 'audio/projectile.mp3';
-AUDIO_PROJECTILE.volume = 0.3;
-AUDIO_PROJECTILE.load();
-
 /**
   * @param {GameEngine} engine THE GameEngine should be EVERYWHERE! =D
   * @param {Spritesheet} sprite Spritesheet
@@ -17,7 +12,7 @@ function Projectile(engine, sprite) {
 
     this.width = 4;
     this.height = 20;
-    this.x = this.sprite.x + (this.sprite.sheet.width() / 2) - (this.width / 2);
+    this.x = this.sprite.x + ((this.sprite.sheet.width() / this.sprite.sheetColumns) / 2) - (this.width / 2) - 4;
     this.y = this.sprite.y;
     this.speed = this.sprite.speed * 4;
     this.distance = 0;

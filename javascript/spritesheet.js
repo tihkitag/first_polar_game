@@ -4,15 +4,15 @@
 
 /**
  * @param {GameEngine} engine THE GameEngine should be EVERYWHERE! =D
- * @param {Image} sheet Sprite image
+ * @param {Image} image Sprite image
  * @param {Number} lines Sheet number of lines
  * @param {Number} columns Sheet number of columns
  * @param {Number} interval Animation interval in miliseconds
  */
-function Spritesheet(engine, sheet, lines, columns, interval) {
+function Spritesheet(engine, image, lines, columns, interval) {
     this.engine = engine;
 
-    this.sheet = sheet;
+    this.image = image;
 
     this.lines = lines;
     this.columns = columns;
@@ -41,20 +41,20 @@ Spritesheet.prototype = {
         this.last = now;
     },
     draw: function(x, y) {
-        var frameWidth = this.sheet.width / this.columns;
-        var frameHeight = this.sheet.height / this.lines;
+        var frameWidth = this.image.width / this.columns;
+        var frameHeight = this.image.height / this.lines;
 
         this.engine.context.drawImage(
-                this.sheet,
+                this.image,
                 (frameWidth * this.column), (frameHeight * this.line),
                 frameWidth, frameHeight,
                 x, y,
                 frameWidth, frameHeight);
     },
     width: function() {
-        return this.sheet.width;
+        return this.image.width;
     },
     height: function() {
-        return this.sheet.height;
+        return this.image.height;
     }
 };

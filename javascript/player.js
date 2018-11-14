@@ -9,12 +9,15 @@ Player.DOWN = +1;
 Player.NO_MOVING = 0;
 
 /**
-  * @param {GameEngine} engine THE GameEngine should be EVERYWHERE! =D
-  * @param {Image} sheet Sprite image 1 x 1
-  */
+ * @param {GameEngine} engine THE GameEngine should be EVERYWHERE! =D
+ * @param {Image} sheet Sprite image 1 x 1
+ */
 function Player(engine, sheet) {
     this.engine = engine;
-    this.sheet = new Spritesheet(this.engine, sheet, 1, 1, 60);
+
+    this.sheetLines = 1;
+    this.sheetColumns = 3;
+    this.sheet = new Spritesheet(this.engine, sheet, this.sheetLines, this.sheetColumns, 120);
 
     this.reposition();
 
@@ -38,18 +41,15 @@ Player.prototype = {
             player.directionX = Player.LEFT;
             player.directionY = Player.NO_MOVING;
 
-            player.sheet.nextFrame();
-
             player.x -= player.distance;
         });
         this.engine.addKeyboardEvent(Keyboard.RIGHT, function() {
-            if (player.x + player.sheet.width() + player.distance >= engine.canvasHelper.width())
+            if (player.x + player.sheet.width() / player.sheetColumns
+                    + player.distance >= engine.canvasHelper.width())
                 return;
 
             player.directionX = Player.RIGHT;
             player.directionY = Player.NO_MOVING;
-
-            player.sheet.nextFrame();
 
             player.x += player.distance;
         });
@@ -60,18 +60,15 @@ Player.prototype = {
             player.directionX = Player.NO_MOVING;
             player.directionY = Player.UP;
 
-            player.sheet.nextFrame();
-
             player.y -= player.distance / 2;
         });
         this.engine.addKeyboardEvent(Keyboard.DOWN, function() {
-            if (player.y + player.sheet.height() + player.distance >= engine.canvasHelper.height())
+            if (player.y + player.sheet.height() / player.sheetLines
+                    + player.distance >= engine.canvasHelper.height())
                 return;
 
             player.directionX = Player.NO_MOVING;
             player.directionY = Player.DOWN;
-
-            player.sheet.nextFrame();
 
             player.y += player.distance / 2;
         });
@@ -91,6 +88,7 @@ Player.prototype = {
     },
     update: function() {
         this.distance = this.speed * this.engine.timeSinceLastCycle / 1000;
+        this.sheet.nextFrame();
     },
     draw: function() {
         this.engine.canvasHelper.save();
@@ -119,6 +117,7 @@ Player.prototype = {
     },
     collidedWith: function(sprite) {
         if (sprite instanceof Enemy) {
+            this.engine.deactivateKeyboard();
             this.engine.releaseSprite(sprite);
             this.engine.releaseSprite(this);
 
@@ -129,10 +128,12 @@ Player.prototype = {
             new Boom(engine, this, ImageLoader.IMAGES.ANIMATION_BOOM, function() {
                 if (--player.lifes < 0) {
                     engine.gameOver();
+                    return;
                 }
 
                 engine.addSprite(player);
                 player.reposition();
+                engine.activateKeyboard();
             });
         }
     }

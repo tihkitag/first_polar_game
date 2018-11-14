@@ -42,6 +42,19 @@ CanvasHelper.prototype = {
     messageSimple: function(message) {
         this.message(message, 50, this.width() / 4, this.height() / 2);
     },
+    messageStat: function(sprite, stats) {
+        this.fillStyle('black');
+        this.strokeStyle('black');
+        this.context.font = '15px coursiva';
+        
+        var messagesCount = 0;
+        for (var s in stats) {
+            messagesCount++;
+            
+            this.context.fillText(stats[s], sprite.x + 50, sprite.y + (messagesCount * 15));
+            this.context.strokeText(stats[s], sprite.x + 50, sprite.y + (messagesCount * 15));
+        }
+    },
     message: function(message, size, x, y) {
         this.fillStyle('white');
         this.strokeStyle('black');

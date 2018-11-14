@@ -70,6 +70,7 @@ Animation.prototype = {
         if (timeSinceLast > 1000) {
             this.engine.addSprite(new Enemy(this.engine, ImageLoader.IMAGES.ENEMY_KOARINO));
             this.lastTime = now;
+            this.engine.player.score += 10;
         }
     },
     processSpritesToRelease: function() {
